@@ -182,7 +182,7 @@ router.post('/:id/deploy', async (req, res) => {
     const version = pipeline.versions[0];
     if (!version) return res.status(400).json({ error: 'No version to deploy' });
 
-    const edges = version.edges as PipelineEdge[];
+    const edges = version.edges as unknown as PipelineEdge[];
 
     if (hasCycle(edges)) {
       return res.status(400).json({ error: 'Pipeline contains a cycle — cannot deploy' });
