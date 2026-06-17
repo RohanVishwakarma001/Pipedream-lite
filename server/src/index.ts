@@ -11,7 +11,9 @@ const app = express();
 const httpServer = http.createServer(app);
 
 const PORT = parseInt(process.env.PORT || '4000');
-const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
+// Strip any trailing slash — a browser's Origin header never has one,
+// so 'https://site.com/' would fail to match and break CORS.
+const CLIENT_URL = (process.env.CLIENT_URL || 'http://localhost:3000').replace(/\/+$/, '');
 
 // Middleware
 app.use(cors({ origin: CLIENT_URL, credentials: true }));
