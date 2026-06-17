@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pipeline {
+  id              String            @id @default(cuid())
+  name            String
+  description     String?
+  webhookKey      String            @unique @default(cuid())
+  isDeployed      Boolean           @default(false)
+  activeVersionId String?
+  tags            String[]          @default([])
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  versions        PipelineVersion[]
+  runs            PipelineRun[]
+}
+
+model PipelineVersion {
+  id         String    @id @default(cuid())
+  pipelineId String
+  version    Int
+  nodes      Json
+  edges      Json
+  isActive   Boolean   @default(false)
+  deployedAt DateTime?
+  createdAt  DateTime  @default(now())
+
+  pipeline   Pipeline      @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  runs       PipelineRun[]
+
+  @@unique([pipelineId, version])
+}
+
+model PipelineRun {
+  id          String     @id @default(cuid())
+  pipelineId  String
+  versionId   String
+  status      RunStatus  @default(RUNNING)
+  trigger     Json
+  error       String?
+  startedAt   DateTime   @default(now())
+  finishedAt  DateTime?
+  durationMs  Int?
+
+  pipeline    Pipeline        @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  version     PipelineVersion @relation(fields: [versionId], references: [id])
+  executions  NodeExecution[]
+}
+
+model NodeExecution {
+  id         String     @id @default(cuid())
+  runId      String
+  nodeId     String
+  nodeName   String
+  nodeType   String
+  status     ExecStatus @default(PENDING)
+  input      Json?
+  output     Json?
+  error      String?
+  startedAt  DateTime   @default(now())
+  durationMs Int?
+
+  run        PipelineRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+}
+
+enum RunStatus {
+  RUNNING
+  SUCCESS
+  FAILED
+}
+
+enum ExecStatus {
+  PENDING
+  RUNNING
+  SUCCESS
+  FAILED
+  SKIPPED
+}

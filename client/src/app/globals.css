@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-gray-950 text-white font-sans antialiased;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+  }
+}
+
+/* React Flow overrides */
+.react-flow__handle {
+  transition: transform 0.15s, background-color 0.15s;
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.4);
+}
+
+.react-flow__edge-path {
+  transition: stroke 0.2s;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #3570ff !important;
+}
+
+.react-flow__controls-button {
+  background: #1f2937 !important;
+  border-color: #374151 !important;
+  color: #9ca3af !important;
+  fill: #9ca3af !important;
+}
+
+.react-flow__controls-button:hover {
+  background: #374151 !important;
+  color: #fff !important;
+  fill: #fff !important;
+}
+
+.react-flow__minimap-mask {
+  fill: rgba(0,0,0,0.4) !important;
+}
+
+/* Monaco editor dark theme fix */
+.monaco-editor {
+  border-radius: 0.5rem;
+}
+
+/* Animated edge for running state */
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 8;
+  animation: flow-dash 0.8s linear infinite;
+}

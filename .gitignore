@@ -1,0 +1,57 @@
+# ---- Dependencies ----
+node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# ---- Environment variables ----
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# ---- Build output ----
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# ---- Next.js (client) ----
+client/.next/
+.next/
+.vercel/
+next-env.d.ts
+
+# ---- Prisma (server) ----
+# Local SQLite databases / migration artifacts
+*.db
+*.db-journal
+server/prisma/*.db
+server/prisma/*.db-journal
+
+# ---- Logs ----
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---- Testing / coverage ----
+coverage/
+.nyc_output/
+
+# ---- Caches ----
+.cache/
+.turbo/
+.eslintcache
+
+# ---- Editor / IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- OS ----
+.DS_Store
+Thumbs.db

@@ -1,0 +1,48 @@
+# ---- Dependencies ----
+/node_modules
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# ---- Environment variables ----
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# ---- Next.js ----
+/.next/
+/out/
+next-env.d.ts
+
+# ---- Build / production ----
+/build
+/dist
+*.tsbuildinfo
+
+# ---- Deployment ----
+.vercel
+
+# ---- Testing / coverage ----
+/coverage
+
+# ---- Caches ----
+.eslintcache
+.turbo
+
+# ---- Logs ----
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---- Editor / IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
