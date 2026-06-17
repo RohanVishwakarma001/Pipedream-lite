@@ -33,12 +33,14 @@ function Field({
 function Input({
   value,
   onChange,
+  onBlur,
   placeholder,
   type = 'text',
   className,
 }: {
   value: string;
   onChange: (v: string) => void;
+  onBlur?: () => void;
   placeholder?: string;
   type?: string;
   className?: string;
@@ -48,6 +50,7 @@ function Input({
       type={type}
       value={value}
       onChange={(e) => onChange(e.target.value)}
+      onBlur={onBlur}
       placeholder={placeholder}
       className={cn(
         'w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-brand-500 transition-colors',
@@ -189,7 +192,7 @@ export function NodeConfigPanel({ node, onClose, onUpdate, onDelete }: Props) {
           <Input
             value={name}
             onChange={setName}
-            onBlur={handleNameBlur as any}
+            onBlur={handleNameBlur}
             placeholder="Node name"
           />
         </Field>

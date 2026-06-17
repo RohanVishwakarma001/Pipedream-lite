@@ -24,7 +24,7 @@ export const TriggerNode = memo(({ data, selected }: NodeProps<NodeData>) => (
     dragging={false}
     showTargetHandle={false}
   >
-    {data.config.method && (
+    {Boolean(data.config.method) && (
       <div className="font-mono text-[10px] bg-amber-500/10 text-amber-400 rounded px-1.5 py-0.5 w-fit">
         {String(data.config.method)}
       </div>
@@ -45,7 +45,7 @@ export const HttpNode = memo(({ data, selected }: NodeProps<NodeData>) => (
     isConnectable
     dragging={false}
   >
-    {data.config.url && (
+    {Boolean(data.config.url) && (
       <div className="font-mono text-[10px] text-blue-400 truncate" title={String(data.config.url)}>
         {String(data.config.httpMethod || 'GET')} {String(data.config.url).replace(/^https?:\/\//, '')}
       </div>
@@ -89,7 +89,7 @@ export const FilterNode = memo(({ data, selected }: NodeProps<NodeData>) => (
       { id: 'false', label: '✗ false' },
     ]}
   >
-    {data.config.condition && (
+    {Boolean(data.config.condition) && (
       <div className="font-mono text-[10px] text-emerald-400 truncate" title={String(data.config.condition)}>
         {String(data.config.condition).slice(0, 40)}
       </div>
@@ -131,7 +131,7 @@ export const SlackNode = memo(({ data, selected }: NodeProps<NodeData>) => (
     isConnectable
     dragging={false}
   >
-    {data.config.slackMessage && (
+    {Boolean(data.config.slackMessage) && (
       <div className="text-[10px] text-gray-400 truncate">{String(data.config.slackMessage).slice(0, 50)}</div>
     )}
   </BaseNode>
@@ -150,7 +150,7 @@ export const LogNode = memo(({ data, selected }: NodeProps<NodeData>) => (
     isConnectable
     dragging={false}
   >
-    {data.config.message && (
+    {Boolean(data.config.message) && (
       <div className="text-[10px] text-gray-400 truncate">{String(data.config.message)}</div>
     )}
   </BaseNode>
@@ -169,7 +169,7 @@ export const EmailNode = memo(({ data, selected }: NodeProps<NodeData>) => (
     isConnectable
     dragging={false}
   >
-    {data.config.to && (
+    {Boolean(data.config.to) && (
       <div className="text-[10px] text-pink-400 truncate">To: {String(data.config.to)}</div>
     )}
   </BaseNode>
